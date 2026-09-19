@@ -1,6 +1,6 @@
 import Cocoa
 
-// Menu bar stopwatch. Left click: start/pause. Right click: menu (reset, quit).
+// Menu bar stopwatch. Left click: start/pause. Double click: reset. Right click: menu.
 class AppDelegate: NSObject, NSApplicationDelegate {
     let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     var timer: Timer?
@@ -24,6 +24,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let event = NSApp.currentEvent
         if event?.type == .rightMouseUp || event?.modifierFlags.contains(.control) == true {
             showMenu()
+        } else if event?.clickCount == 2 {
+            // The first click of the pair already toggled; undo that, then zero.
+            toggle()
+            reset()
         } else {
             toggle()
         }
@@ -66,8 +70,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let text = s >= 3600
             ? String(format: "%d:%02d:%02d", s / 3600, s / 60 % 60, s % 60)
             : String(format: "%d:%02d", s / 60, s % 60)
-        // Filled icon while running, outline while paused.
-        let symbol = startedAt == nil ? "stopwatch" : "stopwatch.fill"
+        // Shows the action a click performs: play while paused, pause while running.
+        let symbol = startedAt == nil ? "play.fill" : "pause.fill"
         item.button?.image = NSImage(systemSymbolName: symbol, accessibilityDescription: "Stopwatch")
         item.button?.imagePosition = .imageLeading
         item.button?.title = " " + text

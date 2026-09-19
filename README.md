@@ -3,9 +3,10 @@
 A minimal stopwatch that lives in the macOS menu bar. One Swift file, no dependencies.
 
 - **Left click**: start / pause
+- **Double click**: reset to 0:00 (keeps running if it was running)
 - **Right click**: menu with Start/Pause, Reset, Quit
 
-The icon is filled while running and outlined while paused.
+The icon shows what a click will do: ▶ while paused, ⏸ while running.
 
 ## Install
 
