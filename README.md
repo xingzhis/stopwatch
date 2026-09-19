@@ -13,7 +13,7 @@ The icon shows what a click will do: ▶ while paused, ⏸ while running.
 Requires macOS 11+ and the Xcode Command Line Tools (`xcode-select --install`).
 
 ```sh
-git clone <repo-url> stopwatch
+git clone https://github.com/xingzhis/stopwatch.git stopwatch
 cd stopwatch
 ./build.sh
 cp -R Stopwatch.app /Applications/
